@@ -1,0 +1,27 @@
+public class Main{
+    public static int peak(int arr[],int n){
+        n = arr.length;
+        int mid = 0;
+        int low = 0;
+        int high = n-1;
+        
+        mid = low+(high-low)/2;
+        while(low<high){
+            if(arr[mid]<arr[mid+1]){
+                low = mid+1;
+            }
+            else{
+                high = mid;
+            }
+            mid = low+(high-low)/2;
+        }
+        return low;
+        
+    }
+    public static void main(String[] args){
+        int arr[] = {1,2,3,4,6,2,1};
+        int n = arr.length;
+        peak(arr,n);
+        System.out.print(peak(arr,n));
+    }
+}

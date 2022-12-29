@@ -1,0 +1,43 @@
+import java.util.*;
+ 
+class GFG {
+ 
+    // Function to calculate the minimum
+    // elements removed
+    public static int reduceArrSize(int[] arr)
+    {
+        HashMap<Integer, Integer> hm = new HashMap<>();
+ 
+        // Making frequency map of elements
+        for (int i = 0; i < arr.length; i++) {
+            hm.put(arr[i], hm.getOrDefault(arr[i], 0) + 1);
+        }
+ 
+        // Storing frequencies in a list
+        ArrayList<Integer> freq
+            = new ArrayList<Integer>(hm.values());
+ 
+        // Sorting the list
+        Collections.sort(freq);
+ 
+        int size = arr.length;
+        int idx = freq.size() - 1;
+        int count = 0;
+ 
+        // Counting number of elements to be deleted
+        while (size > arr.length / 2) {
+            size -= freq[idx--];
+            count++;
+        }
+        return count;
+    }
+ 
+    // Driver Code
+    public static void main(String[] args)
+    {
+        int[] arr = { 2, 2, 2, 2, 4, 4,
+                      6, 7, 7, 3, 3, 3 };
+        int count = reduceArrSize(arr);
+        System.out.println(count);
+    }
+}

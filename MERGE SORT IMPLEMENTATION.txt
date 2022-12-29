@@ -1,0 +1,44 @@
+public class Main{
+    public static void conquer(int arr[],int start,int mid,int end){
+        int merged[] = new int[end-start+1];
+        int i = start;
+        int j = mid+1;
+        int x = 0;
+        
+        while(i<=mid && j<=end){
+            if(arr[i]<=arr[j]){
+                merged[x++] = arr[i++];
+            }
+            else{
+                merged[x++] = arr[j++];
+            }
+        }
+        while(i<=mid){
+            merged[x++] = arr[i++];
+        }
+        while(j<=end){
+            merged[x++] = arr[j++];
+        }
+        for(i=0,j=start;i<merged.length;i++,j++){
+            arr[j] = merged[i];
+        }
+    }
+    public static void divide(int arr[],int start,int end){
+        if(start>=end){
+            return;
+        }
+        int mid = start+(end-start)/2;
+        divide(arr,start,mid);
+        divide(arr,mid+1,end);
+        conquer(arr,start,mid,end);
+    }
+    public static void main(String[] args){
+        int arr[] = {6,5,4,3,2,1};
+        int n = arr.length;
+        divide(arr,0,n-1);
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+        
+    }
+}
